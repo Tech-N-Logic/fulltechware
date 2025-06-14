@@ -1,12 +1,179 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en-US">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+    <title>Fulltechware</title>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Chakra+Petch:ital,wght@0,300;0,400;0,500;0,600;0,700;1,300;1,400;1,500;1,600;1,700&display=swap');
+        @import url('https://fonts.googleapis.com/css2?family=Bruno+Ace&display=swap');
+        @import url('https://fonts.googleapis.com/css2?family=Raleway:ital,wght@0,100..900;1,100..900&display=swap');
+
+        /*-----*/
+        html, body {
+          background: #1e1e1e;
+          overflow-x: hidden;
+          overflow-y: hidden;
+        }
+
+        canvas{
+          position: absolute;
+          width: 100%; height: 100%;
+          top: 0; right: 0; bottom: 0; left: 0;
+        }
+        /*-----*/
+
+        span {
+            color: #fff;
+        }
+
+        #container {
+          width: 100%;
+          margin: 25% auto;
+          display: flex;
+          justify-content: center;
+          align-items: center;
+          position: absolute;
+        }
+
+        #slogan {
+            font-size: 62px;
+            font-family: "Chakra Petch", sans-serif;
+            text-align: center;
+        }
+
+        #full {
+            font-size: 56px;
+            font-family: "Bruno Ace", sans-serif;
+            background-color: #00e05d;
+            padding: 10px 4px 6px 0;
+        }
+
+        #mask {
+            border: 2px solid #00e05d;
+            border-radius: 2px;
+        }
+    </style>
 </head>
 <body>
-    <h1>Fulltechware<sup>®</sup></h1>
-    <h2>Tech N' Logic<sup>®</sup></h2>
+    <canvas></canvas>
+    <div id="container">
+      <div id="content">
+        <span id="slogan">Welcome to the <span id="mask"><span id="full">Full</span><span>ture of tech.</span></span></span>
+      </div>
+    </div>
+    <script>
+    var canvasDots = function() {
+    var canvas = document.querySelector('canvas'),
+      ctx = canvas.getContext('2d'),
+      colorDot = '#00bdbf',
+      color = '#00bdbf';
+    canvas.width = window.innerWidth;
+    canvas.height = window.innerHeight;
+    canvas.style.display = 'block';
+    ctx.fillStyle = colorDot;
+    ctx.lineWidth = .1;
+    ctx.strokeStyle = color;
+
+    var mousePosition = {
+    x: 30 * canvas.width / 100,
+    y: 30 * canvas.height / 100
+    };
+
+    var dots = {
+    nb: 350,
+    distance: 60,
+    d_radius: 100,
+    array: []
+    };
+
+    function Dot(){
+    this.x = Math.random() * canvas.width;
+    this.y = Math.random() * canvas.height;
+
+    this.vx = -.5 + Math.random();
+    this.vy = -.5 + Math.random();
+
+    this.radius = Math.random();
+    }
+
+    Dot.prototype = {
+    create: function(){
+      ctx.beginPath();
+      ctx.arc(this.x, this.y, this.radius, 0, Math.PI * 2, false);
+      ctx.fill();
+    },
+
+    animate: function(){
+      for(i = 0; i < dots.nb; i++){
+
+        var dot = dots.array[i];
+
+        if(dot.y < 0 || dot.y > canvas.height){
+          dot.vx = dot.vx;
+          dot.vy = - dot.vy;
+        }
+        else if(dot.x < 0 || dot.x > canvas.width){
+          dot.vx = - dot.vx;
+          dot.vy = dot.vy;
+        }
+        dot.x += dot.vx;
+        dot.y += dot.vy;
+      }
+    },
+
+    line: function(){
+      for(i = 0; i < dots.nb; i++){
+        for(j = 0; j < dots.nb; j++){
+          i_dot = dots.array[i];
+          j_dot = dots.array[j];
+
+          if((i_dot.x - j_dot.x) < dots.distance && (i_dot.y - j_dot.y) < dots.distance && (i_dot.x - j_dot.x) > - dots.distance && (i_dot.y - j_dot.y) > - dots.distance){
+            if((i_dot.x - mousePosition.x) < dots.d_radius && (i_dot.y - mousePosition.y) < dots.d_radius && (i_dot.x - mousePosition.x) > - dots.d_radius && (i_dot.y - mousePosition.y) > - dots.d_radius){
+              ctx.beginPath();
+              ctx.moveTo(i_dot.x, i_dot.y);
+              ctx.lineTo(j_dot.x, j_dot.y);
+              ctx.stroke();
+              ctx.closePath();
+            }
+          }
+        }
+      }
+    }
+    };
+
+    function createDots(){
+    ctx.clearRect(0, 0, canvas.width, canvas.height);
+    for(i = 0; i < dots.nb; i++){
+      dots.array.push(new Dot());
+      dot = dots.array[i];
+
+      dot.create();
+    }
+
+    dot.line();
+    dot.animate();
+    }
+
+    window.onmousemove = function(parameter) {
+    mousePosition.x = parameter.pageX;
+    mousePosition.y = parameter.pageY;
+    }
+
+    mousePosition.x = window.innerWidth / 2;
+    mousePosition.y = window.innerHeight / 2;
+
+    setInterval(createDots, 1000/30); 
+    };
+
+    window.onload = function() {
+    canvasDots();
+    };
+    </script>
 </body>
 </html>
+
+<!--
+<h1>Fulltechware<sup>®</sup></h1>
+<h2>Tech N' Logic<sup>®</sup></h2>
+-->
