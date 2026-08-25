@@ -1,179 +1,1113 @@
 <!DOCTYPE html>
-<html lang="en-US">
+<html lang="pt-BR" class="no-js">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Fulltechware</title>
-    <style>
-        @import url('https://fonts.googleapis.com/css2?family=Chakra+Petch:ital,wght@0,300;0,400;0,500;0,600;0,700;1,300;1,400;1,500;1,600;1,700&display=swap');
-        @import url('https://fonts.googleapis.com/css2?family=Bruno+Ace&display=swap');
-        @import url('https://fonts.googleapis.com/css2?family=Raleway:ital,wght@0,100..900;1,100..900&display=swap');
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Fulltechware® — Solution for Everything</title>
+<meta name="description" content="Software house. Desenvolvimento sob medida, licenciamento e sustentação de sistemas — sobre a Tech N' Logic®, plataforma modular própria da Fulltechware®.">
+<meta name="theme-color" content="#08170F">
+<meta name="author" content="Fulltechware">
 
-        /*-----*/
-        html, body {
-          background: #1e1e1e;
-          overflow-x: hidden;
-          overflow-y: hidden;
-        }
+<meta property="og:type" content="website">
+<meta property="og:locale" content="pt_BR">
+<meta property="og:site_name" content="Fulltechware®">
+<meta property="og:url" content="https://tech-n-logic.github.io/fulltechware/">
+<meta property="og:title" content="Fulltechware® — Solution for Everything">
+<meta property="og:description" content="Software sob medida. Ou pronto para rodar amanhã. Desenvolvimento, licenciamento e sustentação de sistemas sobre a plataforma modular Tech N' Logic®.">
+<meta name="twitter:card" content="summary_large_image">
+<link rel="canonical" href="https://tech-n-logic.github.io/fulltechware/">
 
-        canvas{
-          position: absolute;
-          width: 100%; height: 100%;
-          top: 0; right: 0; bottom: 0; left: 0;
-        }
-        /*-----*/
+<link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'><rect width='32' height='32' rx='7' fill='%2308170F'/><rect x='9' y='7' width='15' height='4.6' fill='%2300E05C'/><rect x='9' y='7' width='4.6' height='18' fill='%2300E05C'/><rect x='9' y='14.2' width='11' height='4.6' fill='%2300E05C'/></svg>">
 
-        span {
-            color: #fff;
-        }
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Archivo:wdth,wght@62..125,400..900&family=IBM+Plex+Mono:wght@400;500;600&family=IBM+Plex+Sans:wght@400;500;600&display=swap" rel="stylesheet">
 
-        #container {
-          width: 100%;
-          margin: 25% auto;
-          display: flex;
-          justify-content: center;
-          align-items: center;
-          position: absolute;
-        }
+<style>
+/* ============================================================
+   TOKENS
+   ============================================================ */
+:root{
+  --ink:#08170F;
+  --ink-2:#0E2318;
+  --ink-3:#16321f;
+  --paper:#ECEFEA;
+  --card:#FFFFFF;
+  --green:#00E05C;
+  --green-deep:#00873A;
+  --slate:#4E5F55;
+  --line:#D2D8CF;
+  --line-ink:rgba(0,224,92,.20);
 
-        #slogan {
-            font-size: 62px;
-            font-family: "Chakra Petch", sans-serif;
-            text-align: center;
-        }
+  --display:"Archivo","Arial Narrow",Helvetica,sans-serif;
+  --body:"IBM Plex Sans",system-ui,-apple-system,Segoe UI,sans-serif;
+  --mono:"IBM Plex Mono",ui-monospace,SFMono-Regular,Menlo,monospace;
 
-        #full {
-            font-size: 56px;
-            font-family: "Bruno Ace", sans-serif;
-            background-color: #00e05d;
-            padding: 10px 4px 6px 0;
-        }
+  --pad:clamp(20px,5vw,64px);
+  --max:1240px;
+  --sect:clamp(72px,9vw,132px);
+}
 
-        #mask {
-            border: 2px solid #00e05d;
-            border-radius: 2px;
-        }
-    </style>
+/* ============================================================
+   BASE
+   ============================================================ */
+*,*::before,*::after{box-sizing:border-box}
+html{-webkit-text-size-adjust:100%}
+html:focus-within{scroll-behavior:smooth}
+body{
+  margin:0;
+  background:var(--paper);
+  color:var(--ink);
+  font-family:var(--body);
+  font-size:clamp(1rem,.97rem + .18vw,1.075rem);
+  line-height:1.62;
+  -webkit-font-smoothing:antialiased;
+  overflow-x:hidden;
+}
+img{max-width:100%;display:block}
+a{color:inherit}
+button{font:inherit;color:inherit;background:none;border:0;cursor:pointer}
+:focus-visible{outline:2px solid var(--green-deep);outline-offset:3px;border-radius:2px}
+.ink :focus-visible{outline-color:var(--green)}
+::selection{background:var(--green);color:var(--ink)}
+
+.wrap{width:100%;max-width:var(--max);margin-inline:auto;padding-inline:var(--pad)}
+.section{padding-block:var(--sect)}
+.skip{position:absolute;left:-9999px}
+.skip:focus{left:var(--pad);top:12px;z-index:99;background:var(--ink);color:#fff;padding:10px 16px;border-radius:2px}
+
+/* ============================================================
+   TYPE
+   ============================================================ */
+.display{
+  font-family:var(--display);
+  font-weight:800;
+  font-stretch:118%;
+  letter-spacing:-.035em;
+  line-height:.94;
+  margin:0;
+  text-wrap:balance;
+}
+h2.display{font-size:clamp(1.95rem,1.2rem + 2.7vw,3.15rem)}
+h3{font-family:var(--body);font-weight:600;font-size:1.075rem;letter-spacing:-.01em;margin:0}
+p{margin:0}
+
+.label{
+  font-family:var(--mono);
+  font-size:.685rem;
+  font-weight:500;
+  letter-spacing:.18em;
+  text-transform:uppercase;
+  color:var(--slate);
+  margin:0;
+}
+.ink .label{color:rgba(255,255,255,.55)}
+
+.lede{color:var(--slate);max-width:56ch}
+.ink .lede{color:rgba(255,255,255,.66)}
+
+/* the brand's own device: a green highlight block over one word */
+.mk{position:relative;display:inline-block;white-space:nowrap}
+.mk__bar{
+  position:absolute;left:-.06em;right:-.06em;top:.16em;bottom:.09em;
+  background:var(--green);transform:scaleX(0);transform-origin:left center;
+}
+.no-js .mk__bar,.mk--static .mk__bar{transform:scaleX(1)}
+.mk__txt{position:relative}
+.mk--ink .mk__txt{color:var(--ink)}
+.is-ready .mk--anim .mk__bar{animation:swipe .62s .5s cubic-bezier(.22,.85,.24,1) forwards}
+@keyframes swipe{to{transform:scaleX(1)}}
+
+/* ============================================================
+   HEADER
+   ============================================================ */
+.hdr{
+  position:sticky;top:0;z-index:40;
+  background:rgba(236,239,234,.86);
+  backdrop-filter:blur(14px) saturate(1.4);
+  -webkit-backdrop-filter:blur(14px) saturate(1.4);
+  border-bottom:1px solid transparent;
+  transition:border-color .25s ease;
+}
+.hdr.is-stuck{border-bottom-color:var(--line)}
+.hdr__in{display:flex;align-items:center;gap:clamp(12px,2.4vw,32px);height:66px}
+
+.logo{
+  font-family:var(--display);font-weight:800;font-stretch:112%;
+  font-size:1.12rem;letter-spacing:-.028em;text-decoration:none;
+  display:inline-flex;align-items:baseline;flex:0 0 auto;
+}
+.logo sup{font-size:.5em;font-weight:600;margin-left:.15em}
+.logo .mk{margin-left:.01em}
+.logo .mk__bar{top:.1em;bottom:.02em}
+
+.nav{display:flex;gap:clamp(14px,1.8vw,26px);margin-left:auto}
+.nav a{
+  text-decoration:none;font-size:.885rem;font-weight:500;color:var(--slate);
+  padding-block:6px;position:relative;transition:color .18s ease;
+}
+.nav a::after{
+  content:"";position:absolute;left:0;right:100%;bottom:2px;height:1.5px;
+  background:var(--green-deep);transition:right .22s ease;
+}
+.nav a:hover{color:var(--ink)}
+.nav a:hover::after{right:0}
+
+.lang{display:flex;align-items:center;gap:2px;border:1px solid var(--line);border-radius:2px;padding:2px;background:var(--card)}
+.lang button{
+  font-family:var(--mono);font-size:.66rem;font-weight:600;letter-spacing:.1em;
+  padding:4px 8px;color:var(--slate);border-radius:1px;transition:.16s ease;
+}
+.lang button[aria-pressed="true"]{background:var(--ink);color:#fff}
+
+.btn{
+  display:inline-flex;align-items:center;gap:.55em;
+  font-family:var(--mono);font-size:.74rem;font-weight:600;letter-spacing:.1em;text-transform:uppercase;
+  padding:.92em 1.35em;border-radius:2px;text-decoration:none;white-space:nowrap;
+  transition:transform .16s ease,background .16s ease,color .16s ease,border-color .16s ease;
+}
+.btn:active{transform:translateY(1px)}
+.btn--solid{background:var(--ink);color:#fff}
+.btn--solid:hover{background:var(--green);color:var(--ink)}
+.btn--line{border:1px solid var(--line);color:var(--ink);background:var(--card)}
+.btn--line:hover{border-color:var(--ink)}
+.btn--onink{background:var(--green);color:var(--ink)}
+.btn--onink:hover{background:#fff}
+.btn--ghostink{border:1px solid rgba(255,255,255,.24);color:#fff}
+.btn--ghostink:hover{border-color:var(--green);color:var(--green)}
+.btn--ongreen{background:var(--ink);color:#fff}
+.btn--ongreen:hover{background:#fff;color:var(--ink)}
+.btn--sm{padding:.72em 1.05em;font-size:.7rem}
+.btn .arw{transition:transform .18s ease}
+.btn:hover .arw{transform:translateX(3px)}
+
+.burger{display:none;width:38px;height:38px;align-items:center;justify-content:center;border:1px solid var(--line);border-radius:2px;background:var(--card)}
+.burger span{display:block;width:16px;height:1.5px;background:var(--ink);position:relative}
+.burger span::before,.burger span::after{content:"";position:absolute;left:0;width:16px;height:1.5px;background:var(--ink)}
+.burger span::before{top:-5px}
+.burger span::after{top:5px}
+
+/* ============================================================
+   HERO
+   ============================================================ */
+.hero{padding-top:clamp(52px,6.4vw,86px);padding-bottom:clamp(48px,6vw,86px)}
+.hero__grid{display:grid;grid-template-columns:minmax(0,1.2fr) minmax(0,1fr);gap:clamp(30px,5vw,68px);align-items:start;margin-top:clamp(34px,4.2vw,56px)}
+.hero__eyebrow{display:flex;align-items:center;gap:10px;margin-bottom:clamp(20px,3vw,30px)}
+.hero__dot{width:7px;height:7px;background:var(--green);border-radius:50%;flex:0 0 auto}
+.is-ready .hero__dot{animation:blip 2.6s ease-in-out infinite}
+@keyframes blip{0%,100%{opacity:1;transform:scale(1)}50%{opacity:.35;transform:scale(.78)}}
+
+.hero__title{font-size:clamp(2.35rem,1rem + 5.4vw,5.1rem);line-height:.9}
+.hero__title .l2{color:var(--slate)}
+.hero__sub{font-size:clamp(1.03rem,.98rem + .34vw,1.2rem);max-width:46ch}
+.hero__cta{display:flex;flex-wrap:wrap;gap:10px;margin-top:clamp(24px,3vw,34px)}
+
+/* datasheet panel — the hero's second voice */
+.spec{border:1px solid var(--line);background:var(--card);border-radius:3px;overflow:hidden}
+.spec__hd{
+  display:flex;justify-content:space-between;align-items:center;gap:12px;
+  padding:11px 16px;background:var(--ink);color:#fff;
+  font-family:var(--mono);font-size:.66rem;font-weight:500;letter-spacing:.16em;text-transform:uppercase;
+}
+.spec__hd b{color:var(--green);font-weight:500}
+.spec__row{display:grid;grid-template-columns:8.2em 1fr;gap:12px;padding:13px 16px;border-top:1px solid var(--line)}
+.spec__row:first-of-type{border-top:0}
+.spec__k{font-family:var(--mono);font-size:.66rem;letter-spacing:.1em;text-transform:uppercase;color:var(--slate);padding-top:.28em}
+.spec__v{font-size:.925rem;font-weight:500;line-height:1.45}
+.spec__v a{color:var(--green-deep);text-underline-offset:3px}
+
+/* ============================================================
+   MARQUEE
+   ============================================================ */
+.strip{border-block:1px solid var(--line);background:var(--card);overflow:hidden;padding-block:13px}
+.strip__track{display:flex;width:max-content;gap:0;animation:slide 46s linear infinite}
+.strip:hover .strip__track{animation-play-state:paused}
+.strip__set{display:flex;gap:0;flex:0 0 auto}
+.strip__set span{
+  font-family:var(--mono);font-size:.72rem;font-weight:500;letter-spacing:.12em;text-transform:uppercase;
+  color:var(--slate);padding-inline:22px;white-space:nowrap;position:relative;
+}
+.strip__set span::after{content:"";position:absolute;right:-2px;top:50%;width:3px;height:3px;background:var(--green);border-radius:50%;transform:translateY(-50%)}
+@keyframes slide{to{transform:translateX(-50%)}}
+
+/* ============================================================
+   POSITION STRIP (replaces a client-logo wall — we don't invent proof)
+   ============================================================ */
+.pos{display:grid;grid-template-columns:repeat(3,1fr);gap:0;border-top:1px solid var(--line)}
+.pos__i{padding:clamp(28px,3.4vw,42px) clamp(20px,2.6vw,38px);border-right:1px solid var(--line);position:relative}
+.pos__i:last-child{border-right:0}
+.pos__i::before{content:"";position:absolute;top:-1px;left:0;width:0;height:2px;background:var(--green);transition:width .5s cubic-bezier(.22,.85,.24,1)}
+.pos__i.in::before{width:38px}
+.pos__i h3{margin-bottom:9px}
+.pos__i p{color:var(--slate);font-size:.95rem}
+
+/* ============================================================
+   SECTION HEADS
+   ============================================================ */
+.head{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,.85fr);gap:clamp(20px,4vw,60px);align-items:end;margin-bottom:clamp(34px,4.4vw,58px)}
+.head .label{margin-bottom:14px}
+
+/* ============================================================
+   SERVICES
+   ============================================================ */
+.svc{display:grid;grid-template-columns:repeat(6,1fr);gap:1px;background:var(--line);border:1px solid var(--line);border-radius:3px;overflow:hidden}
+.svc__i{grid-column:span 2;background:var(--card);padding:clamp(24px,2.8vw,34px);display:flex;flex-direction:column;gap:11px;transition:background .2s ease}
+.svc__i:nth-child(4),.svc__i:nth-child(5){grid-column:span 3}
+.svc__i:hover{background:#F7F9F6}
+.svc__n{font-family:var(--mono);font-size:.66rem;letter-spacing:.14em;color:var(--green-deep)}
+.svc__i p{color:var(--slate);font-size:.95rem}
+
+/* ============================================================
+   PLATFORM — the ink section, the signature
+   ============================================================ */
+.ink{background:var(--ink);color:#fff;position:relative;overflow:hidden}
+.ink::before{
+  content:"";position:absolute;inset:0;pointer-events:none;
+  background-image:linear-gradient(var(--line-ink) 1px,transparent 1px),linear-gradient(90deg,var(--line-ink) 1px,transparent 1px);
+  background-size:64px 64px;opacity:.32;
+  mask-image:radial-gradient(120% 90% at 50% 42%,#000 12%,transparent 74%);
+  -webkit-mask-image:radial-gradient(120% 90% at 50% 42%,#000 12%,transparent 74%);
+}
+.ink .wrap{position:relative;z-index:1}
+
+.board{
+  display:grid;gap:12px;margin-top:clamp(30px,3.6vw,44px);
+  grid-template-columns:minmax(0,1fr) minmax(0,1.12fr) minmax(0,1.12fr) minmax(0,1fr);
+  grid-template-areas:
+    "cloud core     core  tools"
+    "more  core     core  market"
+    "trade business bank  chain";
+}
+.mod{
+  grid-area:var(--a);position:relative;text-align:left;
+  border:1px solid rgba(255,255,255,.14);border-radius:3px;
+  background:rgba(255,255,255,.028);
+  padding:15px 16px 16px;min-height:104px;
+  display:flex;flex-direction:column;gap:5px;
+  transition:border-color .2s ease,background .2s ease,transform .2s ease;
+}
+.mod:hover{background:rgba(255,255,255,.06);border-color:rgba(0,224,92,.5);transform:translateY(-2px)}
+.mod[aria-pressed="true"]{border-color:var(--green);background:rgba(0,224,92,.09)}
+.mod__id{font-family:var(--mono);font-size:.62rem;letter-spacing:.14em;color:rgba(255,255,255,.52)}
+.mod[aria-pressed="true"] .mod__id{color:var(--green)}
+.mod__nm{font-family:var(--display);font-weight:700;font-stretch:108%;font-size:1.02rem;letter-spacing:-.02em;line-height:1.12}
+.mod__rl{font-family:var(--mono);font-size:.63rem;letter-spacing:.12em;text-transform:uppercase;color:rgba(255,255,255,.58);margin-top:auto}
+.mod--sub{border-style:dashed}
+
+/* bus connectors */
+.mod::before{content:"";position:absolute;background:rgba(255,255,255,.16);transition:background .2s ease}
+.mod[aria-pressed="true"]::before{background:var(--green)}
+.mod[style*="cloud"]::before,.mod[style*="more"]::before{right:-13px;top:50%;width:13px;height:1px}
+.mod[style*="tools"]::before,.mod[style*="market"]::before{left:-13px;top:50%;width:13px;height:1px}
+.mod[style*="trade"]::before,.mod[style*="business"]::before,.mod[style*="bank"]::before,.mod[style*="chain"]::before{top:-13px;left:50%;width:1px;height:13px}
+
+/* the core is the display */
+.core{
+  grid-area:core;border:1px solid rgba(0,224,92,.42);border-radius:3px;
+  background:linear-gradient(180deg,rgba(0,224,92,.07),rgba(0,224,92,.015));
+  padding:clamp(22px,2.6vw,34px);display:flex;flex-direction:column;position:relative;overflow:hidden;
+}
+.core::after{
+  content:"";position:absolute;width:340px;height:340px;right:-130px;top:-150px;border-radius:50%;
+  background:radial-gradient(circle,rgba(0,224,92,.22),transparent 66%);pointer-events:none;
+}
+.core__top{display:flex;justify-content:space-between;align-items:center;gap:14px;margin-bottom:16px;position:relative}
+.core__id{font-family:var(--mono);font-size:.66rem;letter-spacing:.16em;color:var(--green)}
+.core__badge{font-family:var(--mono);font-size:.6rem;letter-spacing:.12em;text-transform:uppercase;color:rgba(255,255,255,.5);border:1px solid rgba(255,255,255,.18);border-radius:99px;padding:3px 10px}
+.core__nm{font-family:var(--display);font-weight:800;font-stretch:118%;letter-spacing:-.03em;line-height:.98;font-size:clamp(1.7rem,1.1rem + 1.9vw,2.7rem);margin:0;position:relative}
+.core__ds{color:rgba(255,255,255,.72);margin-top:14px;max-width:46ch;font-size:1.005rem;position:relative}
+.core__tg{display:flex;flex-wrap:wrap;gap:7px;margin:auto 0 0;padding:22px 0 0;position:relative}
+.core__tg li{
+  list-style:none;font-family:var(--mono);font-size:.63rem;letter-spacing:.1em;text-transform:uppercase;
+  border:1px solid rgba(0,224,92,.34);color:var(--green);border-radius:2px;padding:4px 9px;
+}
+.core.is-swap .core__nm,.core.is-swap .core__ds,.core.is-swap .core__tg,.core.is-swap .core__id{animation:pop .32s ease}
+@keyframes pop{from{opacity:0;transform:translateY(5px)}to{opacity:1;transform:none}}
+
+.board__note{margin-top:16px;font-family:var(--mono);font-size:.66rem;letter-spacing:.1em;color:rgba(255,255,255,.4);text-transform:uppercase}
+
+/* ============================================================
+   PROCESS — a real sequence, so the numbers carry information
+   ============================================================ */
+.proc{display:grid;grid-template-columns:repeat(4,1fr);gap:clamp(18px,2.4vw,30px)}
+.proc__i{border-top:2px solid var(--ink);padding-top:18px;display:flex;flex-direction:column;gap:9px}
+.proc__n{font-family:var(--display);font-weight:800;font-stretch:118%;font-size:2.5rem;line-height:1;letter-spacing:-.04em;color:var(--line)}
+.proc__i.in .proc__n{color:var(--green-deep)}
+.proc__i .proc__n{transition:color .45s ease}
+.proc__i p{color:var(--slate);font-size:.94rem}
+
+/* ============================================================
+   STACK
+   ============================================================ */
+.stack{display:grid;grid-template-columns:repeat(3,1fr);gap:1px;background:var(--line);border:1px solid var(--line);border-radius:3px;overflow:hidden}
+.stack__g{background:var(--card);padding:clamp(22px,2.4vw,30px)}
+.stack__g .label{margin-bottom:16px;color:var(--green-deep)}
+
+/* ============================================================
+   TRACK RECORD — a service ledger, not a logo wall
+   ============================================================ */
+.rec{border-top:2px solid var(--ink)}
+.rec__r{
+  display:grid;grid-template-columns:8.6em minmax(0,.95fr) minmax(0,1.5fr);
+  gap:clamp(14px,2.4vw,36px);align-items:start;
+  padding:clamp(20px,2.3vw,28px) clamp(8px,1.1vw,14px);
+  border-bottom:1px solid var(--line);
+  transition:background .2s ease;
+}
+.rec__r:hover{background:var(--card)}
+.rec__p{font-family:var(--mono);font-size:.715rem;letter-spacing:.07em;color:var(--green-deep);padding-top:.4em;white-space:nowrap}
+.rec__n{font-family:var(--display);font-weight:700;font-stretch:112%;letter-spacing:-.025em;line-height:1.1;font-size:clamp(1.12rem,1rem + .48vw,1.42rem);margin:0}
+.rec__s{font-family:var(--mono);font-size:.64rem;letter-spacing:.12em;text-transform:uppercase;color:var(--slate);margin-top:8px}
+.rec__d{color:var(--slate);font-size:.95rem}
+.rec__note{
+  margin-top:18px;font-family:var(--mono);font-size:.635rem;letter-spacing:.06em;
+  text-transform:uppercase;color:var(--slate);line-height:1.75;max-width:78ch;
+}
+
+.stats{display:grid;grid-template-columns:repeat(4,1fr);gap:1px;background:var(--line);border:1px solid var(--line);border-radius:3px;overflow:hidden;margin-top:clamp(28px,3.2vw,44px)}
+.stats__i{background:var(--card);padding:clamp(20px,2.3vw,28px)}
+.stats__n{font-family:var(--display);font-weight:800;font-stretch:118%;letter-spacing:-.04em;line-height:1;font-size:clamp(1.95rem,1.2rem + 2.2vw,2.9rem)}
+.stats__l{font-family:var(--mono);font-size:.645rem;letter-spacing:.12em;text-transform:uppercase;color:var(--slate);margin-top:12px;line-height:1.55}
+
+/* ============================================================
+   INDUSTRIES
+   ============================================================ */
+.vert{display:grid;grid-template-columns:repeat(3,1fr);gap:1px;background:var(--line);border:1px solid var(--line);border-radius:3px;overflow:hidden}
+.vert__i{background:var(--card);padding:clamp(22px,2.5vw,30px);display:flex;flex-direction:column;gap:14px;transition:background .2s ease}
+.vert__i:hover{background:#F7F9F6}
+.vert__n{font-family:var(--display);font-weight:700;font-stretch:110%;letter-spacing:-.022em;font-size:1.16rem;line-height:1.14;margin:0}
+
+/* ============================================================
+   CHIPS (shared: stack, industries, practices)
+   ============================================================ */
+.chips{list-style:none;margin:0;padding:0;display:flex;flex-wrap:wrap;gap:7px}
+.chips li{
+  font-family:var(--mono);font-size:.715rem;letter-spacing:.02em;
+  border:1px solid var(--line);border-radius:2px;padding:5px 9px;color:var(--ink);
+  transition:border-color .18s ease,color .18s ease;
+}
+.chips li:hover{border-color:var(--green-deep);color:var(--green-deep)}
+.chips--soft li{color:var(--slate)}
+
+.prax{margin-top:clamp(36px,4.2vw,54px);border-top:1px solid var(--line);padding-top:clamp(22px,2.6vw,30px)}
+.prax .label{margin-bottom:15px;color:var(--green-deep)}
+
+/* ============================================================
+   CTA + FOOTER
+   ============================================================ */
+.cta{background:var(--green);color:var(--ink)}
+.cta__in{display:grid;grid-template-columns:minmax(0,1fr) auto;gap:clamp(24px,4vw,56px);align-items:center;padding-block:clamp(54px,6vw,84px)}
+.cta h2{font-size:clamp(1.85rem,1.15rem + 2.5vw,3rem)}
+.cta p{margin-top:14px;max-width:48ch;color:rgba(8,23,15,.72)}
+.cta__act{display:flex;flex-direction:column;gap:10px}
+.cta .label{color:rgba(8,23,15,.6)}
+
+.ft{background:var(--ink);color:#fff;padding-block:clamp(52px,5.5vw,74px) 26px}
+.ft__grid{display:grid;grid-template-columns:minmax(0,1.5fr) repeat(3,minmax(0,1fr));gap:clamp(26px,3.4vw,48px)}
+.ft .logo{color:#fff;font-size:1.3rem}
+.ft__bio{color:rgba(255,255,255,.58);font-size:.92rem;margin-top:14px;max-width:34ch}
+.ft__meta{font-family:var(--mono);font-size:.66rem;letter-spacing:.1em;text-transform:uppercase;color:rgba(255,255,255,.42);margin-top:12px}
+.ft__col h4{font-family:var(--mono);font-size:.66rem;font-weight:500;letter-spacing:.16em;text-transform:uppercase;color:rgba(255,255,255,.45);margin:0 0 14px}
+.ft__col ul{list-style:none;margin:0;padding:0;display:flex;flex-direction:column;gap:9px}
+.ft__col a{text-decoration:none;font-size:.92rem;color:rgba(255,255,255,.8);transition:color .16s ease}
+.ft__col a:hover{color:var(--green)}
+.ft__col li span{font-size:.86rem;color:rgba(255,255,255,.45);line-height:1.5;display:block}
+.ft__btm{
+  margin-top:clamp(38px,4.4vw,58px);padding-top:22px;border-top:1px solid rgba(255,255,255,.12);
+  display:flex;flex-wrap:wrap;gap:10px 26px;justify-content:space-between;
+  font-family:var(--mono);font-size:.66rem;letter-spacing:.08em;color:rgba(255,255,255,.42);text-transform:uppercase;
+}
+
+/* ============================================================
+   REVEAL
+   ============================================================ */
+.js .rv{opacity:0;transform:translateY(16px)}
+.js .rv.in{opacity:1;transform:none;transition:opacity .62s cubic-bezier(.22,.85,.24,1),transform .62s cubic-bezier(.22,.85,.24,1)}
+.js .rv-d1.in{transition-delay:.07s}
+.js .rv-d2.in{transition-delay:.14s}
+.js .rv-d3.in{transition-delay:.21s}
+
+/* ============================================================
+   RESPONSIVE
+   ============================================================ */
+@media (max-width:1040px){
+  .hero__grid{grid-template-columns:1fr;align-items:start}
+  .spec{max-width:520px}
+  .head{grid-template-columns:1fr}
+  .stack{grid-template-columns:repeat(2,1fr)}
+  .proc{grid-template-columns:repeat(2,1fr)}
+  .vert{grid-template-columns:repeat(2,1fr)}
+  .rec__r{grid-template-columns:7.6em minmax(0,1fr)}
+  .rec__d{grid-column:2/-1}
+}
+@media (max-width:860px){
+  .nav{display:none}
+  .nav.is-open{
+    display:flex;position:absolute;left:0;right:0;top:66px;flex-direction:column;gap:0;
+    background:var(--card);border-block:1px solid var(--line);padding:8px var(--pad) 16px;
+  }
+  .nav.is-open a{padding-block:12px;border-bottom:1px solid var(--line);font-size:1rem}
+  .burger{display:inline-flex;order:3}
+  .hdr__in{gap:10px}
+  .hdr__cta{display:none}
+  .lang{margin-left:auto}
+  .board{grid-template-columns:repeat(2,1fr);grid-template-areas:
+    "core core"
+    "cloud more"
+    "tools market"
+    "trade business"
+    "bank chain";}
+  .mod::before{display:none}
+  .mod{min-height:0;padding:13px 14px 14px}
+  .mod__nm{font-size:.95rem}
+  .pos{grid-template-columns:1fr}
+  .pos__i{border-right:0;border-bottom:1px solid var(--line)}
+  .pos__i:last-child{border-bottom:0}
+  .svc{grid-template-columns:1fr}
+  .svc__i,.svc__i:nth-child(4),.svc__i:nth-child(5){grid-column:span 1}
+  .cta__in{grid-template-columns:1fr}
+  .ft__grid{grid-template-columns:1fr 1fr}
+  .vert{grid-template-columns:1fr}
+  .stats{grid-template-columns:repeat(2,1fr)}
+  .rec__r{grid-template-columns:1fr;gap:9px;padding-inline:0}
+  .rec__d{grid-column:1/-1}
+  .rec__p{padding-top:0}
+}
+@media (max-width:560px){
+  .proc{grid-template-columns:1fr}
+  .stats{grid-template-columns:1fr}
+  .stack{grid-template-columns:1fr}
+  .ft__grid{grid-template-columns:1fr}
+  .spec__row{grid-template-columns:1fr;gap:3px}
+  .lang button{padding:4px 6px}
+}
+@media (max-width:359px){
+  .board{grid-template-columns:1fr;grid-template-areas:"core" "cloud" "more" "tools" "market" "trade" "business" "bank" "chain"}
+}
+
+@media (prefers-reduced-motion:reduce){
+  html:focus-within{scroll-behavior:auto}
+  *,*::before,*::after{animation-duration:.001ms !important;animation-iteration-count:1 !important;transition-duration:.001ms !important}
+  .mk__bar{transform:scaleX(1)}
+  .js .rv{opacity:1;transform:none}
+  .strip__track{animation:none}
+}
+</style>
 </head>
+
 <body>
-    <canvas></canvas>
-    <div id="container">
-      <div id="content">
-        <span id="slogan">Welcome to the <span id="mask"><span id="full">Full</span><span>ture of tech.</span></span></span>
+<script>document.documentElement.className="js";</script>
+
+<a class="skip" href="#main" data-en="Skip to content">Ir para o conteúdo</a>
+
+<!-- ========================= HEADER ========================= -->
+<header class="hdr" id="hdr">
+  <div class="wrap hdr__in">
+    <a class="logo" href="#top" aria-label="Fulltechware">
+      Fulltech<span class="mk mk--ink mk--static"><span class="mk__bar" aria-hidden="true"></span><span class="mk__txt">ware</span></span><sup>®</sup>
+    </a>
+
+    <nav class="nav" id="nav" aria-label="Principal">
+      <a href="#empresas" data-en="Companies">Empresas</a>
+      <a href="#servicos" data-en="Services">Serviços</a>
+      <a href="#plataforma" data-en="Platform">Plataforma</a>
+      <a href="#setores" data-en="Industries">Setores</a>
+      <a href="#stack" data-en="Stack">Stack</a>
+      <a href="#contato" data-en="Contact">Contato</a>
+    </nav>
+
+    <div class="lang" role="group" aria-label="Idioma / Language">
+      <button type="button" data-lang="pt" aria-pressed="true">PT</button>
+      <button type="button" data-lang="en" aria-pressed="false">EN</button>
+    </div>
+
+    <a class="btn btn--solid btn--sm hdr__cta" href="#contato" data-en="Start a project">Iniciar projeto</a>
+
+    <button class="burger" id="burger" type="button" aria-expanded="false" aria-controls="nav" aria-label="Abrir menu" data-en-aria="Open menu"><span></span></button>
+  </div>
+</header>
+
+<main id="main">
+<span id="top"></span>
+
+<!-- ========================= HERO ========================= -->
+<section class="wrap hero">
+  <div class="hero__eyebrow">
+    <span class="hero__dot" aria-hidden="true"></span>
+    <p class="label" data-en="Software house · Solution for Everything">Software house · Solution for Everything</p>
+  </div>
+
+  <h1 class="display hero__title">
+    <span data-en="Software built to fit.">Software sob medida.</span><br>
+    <span class="l2" data-en="Or ready to">Ou pronto para</span><br>
+    <span class="mk mk--ink mk--anim"><span class="mk__bar" aria-hidden="true"></span><span class="mk__txt" data-en="run tomorrow.">rodar amanhã.</span></span>
+  </h1>
+
+  <div class="hero__grid">
+    <div>
+      <p class="lede hero__sub" data-en="Fulltechware® builds, licenses and maintains business systems end to end — on top of Tech N' Logic®, the modular platform we own and keep evolving.">A Fulltechware® desenvolve, licencia e sustenta sistemas de ponta a ponta — sobre a Tech N' Logic®, a plataforma modular que é nosso produto próprio.</p>
+
+      <div class="hero__cta">
+        <a class="btn btn--solid" href="#contato"><span data-en="Talk to the team">Falar com a equipe</span> <span class="arw" aria-hidden="true">→</span></a>
+        <a class="btn btn--line" href="#plataforma" data-en="See the platform">Conhecer a plataforma</a>
       </div>
     </div>
-    <script>
-    var canvasDots = function() {
-    var canvas = document.querySelector('canvas'),
-      ctx = canvas.getContext('2d'),
-      colorDot = '#00bdbf',
-      color = '#00bdbf';
-    canvas.width = window.innerWidth;
-    canvas.height = window.innerHeight;
-    canvas.style.display = 'block';
-    ctx.fillStyle = colorDot;
-    ctx.lineWidth = .1;
-    ctx.strokeStyle = color;
 
-    var mousePosition = {
-    x: 30 * canvas.width / 100,
-    y: 30 * canvas.height / 100
-    };
+    <aside class="spec" aria-label="Ficha técnica">
+      <div class="spec__hd"><span data-en="Company data">Ficha da empresa</span> <b>FTW-01</b></div>
+      <div class="spec__row"><div class="spec__k" data-en="Model">Modelo</div><div class="spec__v" data-en="Custom development · Software licensing">Desenvolvimento sob medida · Licenciamento</div></div>
+      <div class="spec__row"><div class="spec__k" data-en="Product">Produto</div><div class="spec__v">Tech N' Logic® — <span data-en="8 modules">8 módulos</span></div></div>
+      <div class="spec__row"><div class="spec__k" data-en="License">Licença</div><div class="spec__v" data-en="Proprietary. All rights reserved.">Proprietária. Todos os direitos reservados.</div></div>
+      <div class="spec__row"><div class="spec__k" data-en="Core stack">Stack base</div><div class="spec__v">PHP · TypeScript · Go · Java · C#</div></div>
+      <div class="spec__row"><div class="spec__k" data-en="Experience">Experiência</div><div class="spec__v"><span data-en="Shipping software since 2020">Entregando software desde 2020</span></div></div>
+      <div class="spec__row"><div class="spec__k" data-en="Base">Base</div><div class="spec__v" data-en="Belo Horizonte, MG · Brazil">Belo Horizonte, MG · Brasil</div></div>
+      <div class="spec__row"><div class="spec__k" data-en="Contact">Contato</div><div class="spec__v"><a href="mailto:fulltechware@gmail.com">fulltechware@gmail.com</a></div></div>
+    </aside>
+  </div>
+</section>
 
-    var dots = {
-    nb: 350,
-    distance: 60,
-    d_radius: 100,
-    array: []
-    };
+<!-- ========================= STACK MARQUEE ========================= -->
+<div class="strip" aria-hidden="true">
+  <div class="strip__track" id="strip">
+    <div class="strip__set">
+      <span>PHP</span><span>Symfony</span><span>TypeScript</span><span>NestJS</span><span>Go</span><span>Gin</span><span>Java</span><span>Spring Boot</span><span>C#/.NET</span><span>Python</span><span>C/C++</span><span>Angular</span><span>Vue.js</span><span>PostgreSQL</span><span>Oracle</span><span>MongoDB</span><span>Redis</span><span>Neo4j</span><span>gRPC</span><span>GraphQL</span><span>WebRTC</span><span>WebSockets</span><span>RabbitMQ</span><span>MQTT</span><span>SIP</span><span>ONVIF</span><span>Docker</span><span>NGINX</span><span>Jenkins</span><span>Linux</span>
+    </div>
+  </div>
+</div>
 
-    function Dot(){
-    this.x = Math.random() * canvas.width;
-    this.y = Math.random() * canvas.height;
+<!-- ========================= POSITION ========================= -->
+<section class="wrap" style="padding-block:0">
+  <div class="pos">
+    <article class="pos__i rv">
+      <h3 data-en="We don't start from zero">Não começamos do zero</h3>
+      <p data-en="Tech N' Logic® already solves what every system has in common. Your project starts at what is specific to your business.">A Tech N' Logic® já resolve o que todo sistema tem em comum. Seu projeto começa no que é específico do seu negócio.</p>
+    </article>
+    <article class="pos__i rv rv-d1">
+      <h3 data-en="Built to fit, or ready to use">Sob medida ou pronto para uso</h3>
+      <p data-en="You pick the model: custom development, an adaptable license, or closed software that goes live fast.">Você escolhe o modelo: desenvolvimento customizado, licença adaptável ou software fechado com implantação rápida.</p>
+    </article>
+    <article class="pos__i rv rv-d2">
+      <h3 data-en="From the database to the deploy">Do banco de dados ao deploy</h3>
+      <p data-en="Back-end, front-end, data, integrations and infrastructure handled by the same team.">Back-end, front-end, dados, integrações e infraestrutura com o mesmo time.</p>
+    </article>
+  </div>
+</section>
 
-    this.vx = -.5 + Math.random();
-    this.vy = -.5 + Math.random();
+<!-- ========================= TRACK RECORD ========================= -->
+<section class="wrap section" id="empresas">
+  <div class="head">
+    <div>
+      <p class="label" data-en="Track record">Trajetória</p>
+      <h2 class="display" data-en="Companies that trust us">Empresas que confiam em nós</h2>
+    </div>
+    <p class="lede" data-en="Systems our engineering has put into production since 2020 — in IoT, telecom, AI and autonomous vehicles. Listed as delivery history, in direct employment or under contract.">Sistemas que nossa engenharia colocou em produção desde 2020 — em IoT, telecom, IA e veículos autônomos. Listadas como histórico de entrega, em vínculo direto ou por contrato.</p>
+  </div>
 
-    this.radius = Math.random();
+  <div class="rec">
+    <article class="rec__r rv">
+      <p class="rec__p">2026 — <span data-en="present">atual</span></p>
+      <div>
+        <h3 class="rec__n">SEESTEC Engenharia e Tecnologia</h3>
+        <p class="rec__s" data-en="AI · IoT · Autonomous vehicles">IA · IoT · Veículos autônomos</p>
+      </div>
+      <p class="rec__d" data-en="APIs, web services and integration routines for AI, IoT, remote teleoperation and autonomous vehicles, with real-time communication over WebRTC, WebSockets, RTP/RTSP and MQTT.">APIs, serviços web e rotinas de integração para IA, IoT, teleoperação remota e veículos autônomos, com comunicação em tempo real sobre WebRTC, WebSockets, RTP/RTSP e MQTT.</p>
+    </article>
+
+    <article class="rec__r rv">
+      <p class="rec__p">2025 — 2026</p>
+      <div>
+        <h3 class="rec__n">ARQIA Telecom &amp; IoT Latam</h3>
+        <p class="rec__s" data-en="Telecom · MVNO · VoIP">Telecom · MVNO · VoIP</p>
+      </div>
+      <p class="rec__d" data-en="REST and SOAP APIs plus integration routines for IoT, MVNO and VoIP environments, built on C#/.NET, PHP/Laravel, SQL Server and Azure services.">APIs REST e SOAP e rotinas de integração para ambientes de IoT, MVNO e VoIP, sobre C#/.NET, PHP/Laravel, SQL Server e serviços Azure.</p>
+    </article>
+
+    <article class="rec__r rv">
+      <p class="rec__p">2023 — 2024</p>
+      <div>
+        <h3 class="rec__n">SITECH Brazil</h3>
+        <p class="rec__s" data-en="Teleoperation · Industrial automation">Teleoperação · Automação industrial</p>
+      </div>
+      <p class="rec__d" data-en="Imaging systems for teleoperation and remote control of autonomous vehicles, in C/C++, Qt/QML and MQTT, over CAN/CANopen telemetry networks.">Sistemas de imagem para teleoperação e controle remoto de veículos autônomos, em C/C++, Qt/QML e MQTT, sobre redes de telemetria CAN/CANopen.</p>
+    </article>
+
+    <article class="rec__r rv">
+      <p class="rec__p">2020 — 2023</p>
+      <div>
+        <h3 class="rec__n">Sotreq · CAT Latam</h3>
+        <p class="rec__s" data-en="Data · Process automation">Dados · Automação de processos</p>
+      </div>
+      <p class="rec__d" data-en="Process automation and data analysis tooling in Python and SQLite, plus KPIs and dashboards in Power BI, DAX and VBA.">Ferramentas de automação de processos e análise de dados em Python e SQLite, além de KPIs e dashboards em Power BI, DAX e VBA.</p>
+    </article>
+  </div>
+
+  <p class="rec__note" data-en="Projects delivered by Fulltechware® professionals, in direct employment or under contract. The marks cited belong to their respective owners and are shown as delivery history, not as an endorsement.">Projetos entregues por profissionais da Fulltechware®, em vínculo direto ou por contrato. As marcas citadas pertencem aos respectivos titulares e constam como histórico de entrega, não como endosso.</p>
+
+  <div class="stats">
+    <div class="stats__i rv"><p class="stats__n">2020</p><p class="stats__l" data-en="Shipping software since">Entregando software desde</p></div>
+    <div class="stats__i rv rv-d1"><p class="stats__n">4</p><p class="stats__l" data-en="Companies with systems in production">Empresas com sistema em produção</p></div>
+    <div class="stats__i rv rv-d2"><p class="stats__n">6</p><p class="stats__l" data-en="Industries served">Setores atendidos</p></div>
+    <div class="stats__i rv rv-d3"><p class="stats__n">8</p><p class="stats__l" data-en="Modules in Tech N' Logic®">Módulos na Tech N' Logic®</p></div>
+  </div>
+</section>
+
+<!-- ========================= SERVICES ========================= -->
+<section class="wrap section" id="servicos" style="padding-top:0">
+  <div class="head">
+    <div>
+      <p class="label" data-en="Services">Serviços</p>
+      <h2 class="display" data-en="Five ways to hire us. One team.">Cinco formas de contratar. Um time só.</h2>
+    </div>
+    <p class="lede" data-en="Every engagement runs on the same engineering standard, whether it is a system written from scratch or a license that goes live next week.">Todo trabalho segue o mesmo padrão de engenharia — seja um sistema escrito do zero ou uma licença que entra no ar na semana que vem.</p>
+  </div>
+
+  <div class="svc">
+    <article class="svc__i rv">
+      <p class="svc__n">S01</p>
+      <h3 data-en="Custom development">Desenvolvimento sob medida</h3>
+      <p data-en="Systems and programs written from scratch for requirements no off-the-shelf product covers.">Sistemas e programas criados do zero para requisitos que nenhum produto de prateleira cobre.</p>
+    </article>
+    <article class="svc__i rv rv-d1">
+      <p class="svc__n">S02</p>
+      <h3 data-en="Customizable licensing">Licenciamento customizável</h3>
+      <p data-en="Ready solutions we adapt to your context, your rules and the way your operation already works.">Soluções prontas que adaptamos ao seu contexto, às suas regras e ao jeito que sua operação já funciona.</p>
+    </article>
+    <article class="svc__i rv rv-d2">
+      <p class="svc__n">S03</p>
+      <h3 data-en="Ready-to-use licensing">Licenciamento pronto para uso</h3>
+      <p data-en="Closed software with fast rollout and high performance, with no customization phase.">Software fechado, de implantação rápida e alta performance, sem etapa de customização.</p>
+    </article>
+    <article class="svc__i rv">
+      <p class="svc__n">S04</p>
+      <h3 data-en="IT consulting">Consultoria em TI</h3>
+      <p data-en="Specialist support to get more out of the technology you already pay for and to cut waste from your processes.">Apoio especializado para extrair mais da tecnologia que você já paga e tirar o desperdício dos seus processos.</p>
+    </article>
+    <article class="svc__i rv rv-d1">
+      <p class="svc__n">S05</p>
+      <h3 data-en="Support and maintenance">Suporte e manutenção</h3>
+      <p data-en="Preventive and corrective maintenance, continuous technical support and the everyday IT work that keeps systems running.">Manutenção preventiva e corretiva, suporte técnico contínuo e os serviços de TI que mantêm o sistema no ar.</p>
+    </article>
+  </div>
+</section>
+
+<!-- ========================= PLATFORM (signature) ========================= -->
+<section class="ink" id="plataforma">
+  <div class="wrap section">
+    <div class="head">
+      <div>
+        <p class="label" data-en="The product">O produto</p>
+        <h2 class="display">Tech N' Logic<sup style="font-size:.42em;vertical-align:super">®</sup></h2>
+      </div>
+      <p class="lede" data-en="A modular ecosystem, not a single program. A core, and everything that plugs into it. Pick a module to read what it does.">Um ecossistema modular, não um programa único. Um núcleo, e tudo que se conecta a ele. Escolha um módulo para ver o que ele faz.</p>
+    </div>
+
+    <div class="board" id="board">
+      <div class="core" id="core" aria-live="polite">
+        <div class="core__top">
+          <span class="core__id" id="coreId">MÓDULO 01 / 09</span>
+          <span class="core__badge" id="coreBadge">Núcleo</span>
+        </div>
+        <h3 class="core__nm" id="coreNm">Tech N' Core</h3>
+        <p class="core__ds" id="coreDs">Arquitetura modular e as funções essenciais do sistema. É o ponto onde todo o resto se conecta — e o que permite customizar sem reescrever.</p>
+        <ul class="core__tg" id="coreTg">
+          <li>Arquitetura modular</li><li>Base do ecossistema</li><li>Customizável</li>
+        </ul>
+      </div>
+
+      <button type="button" class="mod" style="--a:cloud" data-key="cloud" aria-pressed="false">
+        <span class="mod__id">03</span><span class="mod__nm">Tech N' Cloud</span><span class="mod__rl">Nuvem</span>
+      </button>
+      <button type="button" class="mod" style="--a:more" data-key="more" aria-pressed="false">
+        <span class="mod__id">02</span><span class="mod__nm">Tech N' More</span><span class="mod__rl">Extensões</span>
+      </button>
+      <button type="button" class="mod" style="--a:tools" data-key="tools" aria-pressed="false">
+        <span class="mod__id">04</span><span class="mod__nm">Tech N' Tools</span><span class="mod__rl">SDK</span>
+      </button>
+      <button type="button" class="mod" style="--a:market" data-key="market" aria-pressed="false">
+        <span class="mod__id">05</span><span class="mod__nm">Tech N' Market</span><span class="mod__rl">Marketplace</span>
+      </button>
+      <button type="button" class="mod" style="--a:trade" data-key="trade" aria-pressed="false">
+        <span class="mod__id">06</span><span class="mod__nm">Tech N' Trade</span><span class="mod__rl">B2B</span>
+      </button>
+      <button type="button" class="mod" style="--a:business" data-key="business" aria-pressed="false">
+        <span class="mod__id">07</span><span class="mod__nm">Tech N' Business</span><span class="mod__rl">ERP &amp; CRM</span>
+      </button>
+      <button type="button" class="mod" style="--a:bank" data-key="bank" aria-pressed="false">
+        <span class="mod__id">08</span><span class="mod__nm">Tech Bank</span><span class="mod__rl">Financeiro</span>
+      </button>
+      <button type="button" class="mod mod--sub" style="--a:chain" data-key="chain" aria-pressed="false">
+        <span class="mod__id">09</span><span class="mod__nm">FullTech · FullChain</span><span class="mod__rl">Sub-módulos</span>
+      </button>
+    </div>
+
+    <p class="board__note" data-en="FullTech and FullChain are part of Tech Bank. TECH is FullChain's native token.">FullTech e FullChain fazem parte do Tech Bank. TECH é o token nativo da FullChain.</p>
+  </div>
+</section>
+
+<!-- ========================= INDUSTRIES ========================= -->
+<section class="wrap section" id="setores">
+  <div class="head">
+    <div>
+      <p class="label" data-en="Industries">Setores</p>
+      <h2 class="display" data-en="Where we have already shipped">Onde já entregamos</h2>
+    </div>
+    <p class="lede" data-en="Each of these has our code running in production — with the protocols and tooling that the sector actually demands.">Cada um destes tem código nosso rodando em produção — com os protocolos e as ferramentas que o setor realmente exige.</p>
+  </div>
+
+  <div class="vert">
+    <article class="vert__i rv">
+      <h3 class="vert__n" data-en="IoT and telemetry">IoT e telemetria</h3>
+      <ul class="chips chips--soft"><li>MQTT/Mosquitto</li><li>CAN/CANopen</li><li>TCP/UDP</li><li>RabbitMQ</li></ul>
+    </article>
+    <article class="vert__i rv rv-d1">
+      <h3 class="vert__n" data-en="Telecom, MVNO and VoIP">Telecom, MVNO e VoIP</h3>
+      <ul class="chips chips--soft"><li>SIP</li><li>RTP/RTSP</li><li>APIs SOAP</li><li>Azure</li></ul>
+    </article>
+    <article class="vert__i rv rv-d2">
+      <h3 class="vert__n" data-en="AI and computer vision">IA e visão computacional</h3>
+      <ul class="chips chips--soft"><li>OpenCV</li><li>PyTorch</li><li>NVIDIA Jetson</li><li>LLM / RAG</li></ul>
+    </article>
+    <article class="vert__i rv">
+      <h3 class="vert__n" data-en="Teleoperation and autonomous vehicles">Teleoperação e veículos autônomos</h3>
+      <ul class="chips chips--soft"><li>WebRTC</li><li>WebSockets</li><li>FFmpeg / GStreamer</li><li>ONVIF</li></ul>
+    </article>
+    <article class="vert__i rv rv-d1">
+      <h3 class="vert__n" data-en="Industrial automation">Automação industrial</h3>
+      <ul class="chips chips--soft"><li>C/C++</li><li>Qt/QML</li><li>Linux embarcado</li><li>Telemetria</li></ul>
+    </article>
+    <article class="vert__i rv rv-d2">
+      <h3 class="vert__n" data-en="Data and process automation">Dados e automação de processos</h3>
+      <ul class="chips chips--soft"><li>Python</li><li>Power BI / DAX</li><li>SQL</li><li>VBA</li></ul>
+    </article>
+  </div>
+</section>
+
+<!-- ========================= PROCESS ========================= -->
+<section class="wrap section" id="processo" style="padding-top:0">
+  <div class="head">
+    <div>
+      <p class="label" data-en="How we work">Como trabalhamos</p>
+      <h2 class="display" data-en="Four stages. In this order, every time.">Quatro etapas. Nesta ordem, sempre.</h2>
+    </div>
+    <p class="lede" data-en="The sequence matters: no line of code gets written before we understand the operation it has to serve.">A sequência importa: nenhuma linha de código é escrita antes de entendermos a operação que ela precisa atender.</p>
+  </div>
+
+  <div class="proc">
+    <article class="proc__i rv">
+      <p class="proc__n">01</p>
+      <h3 data-en="Diagnosis">Diagnóstico</h3>
+      <p data-en="We map the operation, the real problem and the constraints — budget, deadline, legacy systems, people.">Mapeamos a operação, o problema real e as restrições — orçamento, prazo, sistemas legados, pessoas.</p>
+    </article>
+    <article class="proc__i rv rv-d1">
+      <p class="proc__n">02</p>
+      <h3 data-en="Architecture">Arquitetura</h3>
+      <p data-en="We define what comes ready from Tech N' Logic® and what has to be built for you. You see the line before we start.">Definimos o que vem pronto da Tech N' Logic® e o que precisa ser feito para você. Você vê essa linha antes de começarmos.</p>
+    </article>
+    <article class="proc__i rv rv-d2">
+      <p class="proc__n">03</p>
+      <h3 data-en="Development">Desenvolvimento</h3>
+      <p data-en="Short delivery cycles, versioned and reviewed code, tests, and something working in your hands early.">Ciclos curtos de entrega, código versionado e revisado, testes, e algo funcionando na sua mão desde cedo.</p>
+    </article>
+    <article class="proc__i rv rv-d3">
+      <p class="proc__n">04</p>
+      <h3 data-en="Maintenance">Sustentação</h3>
+      <p data-en="Preventive and corrective maintenance, technical support and continuous evolution after go-live.">Manutenção preventiva e corretiva, suporte técnico e evolução contínua depois do go-live.</p>
+    </article>
+  </div>
+
+  <div class="prax rv">
+    <p class="label" data-en="Engineering practices">Práticas de engenharia</p>
+    <ul class="chips">
+      <li>SOLID</li><li>DDD</li><li>TDD</li><li>Design Patterns</li><li>Clean Architecture</li>
+      <li data-en="Hexagonal Architecture">Arquitetura Hexagonal</li><li>MVC</li>
+      <li data-en="Microservices">Microsserviços</li>
+      <li data-en="Event-Driven Architecture">Arquitetura orientada a eventos</li>
+      <li>System Design</li><li>Design Docs</li><li>CI/CD</li><li>Scrum · Kanban</li>
+    </ul>
+  </div>
+</section>
+
+<!-- ========================= STACK ========================= -->
+<section class="wrap section" id="stack" style="padding-top:0">
+  <div class="head">
+    <div>
+      <p class="label" data-en="Stack">Stack</p>
+      <h2 class="display" data-en="Chosen for the problem, not for the trend.">Escolhida pelo problema, não pela moda.</h2>
+    </div>
+    <p class="lede" data-en="We work across several languages and runtimes so the decision stays technical: what fits the load, the team and the lifespan of the system.">Trabalhamos com várias linguagens e runtimes para que a decisão continue técnica: o que cabe na carga, no time e na vida útil do sistema.</p>
+  </div>
+
+  <div class="stack">
+    <div class="stack__g rv">
+      <p class="label" data-en="Languages">Linguagens</p>
+      <ul class="chips"><li>PHP</li><li>TypeScript</li><li>JavaScript</li><li>Go</li><li>Java</li><li>C#</li><li>Python</li><li>Ruby</li><li>C/C++</li></ul>
+    </div>
+    <div class="stack__g rv rv-d1">
+      <p class="label" data-en="Frameworks">Frameworks</p>
+      <ul class="chips"><li>Symfony</li><li>NestJS</li><li>Spring Boot</li><li>Gin</li><li>Laravel</li><li>ASP.NET</li><li>Express</li><li>Ruby on Rails</li><li>Angular</li><li>Vue.js</li><li>Electron</li></ul>
+    </div>
+    <div class="stack__g rv rv-d2">
+      <p class="label" data-en="Databases">Bancos de dados</p>
+      <ul class="chips"><li>PostgreSQL</li><li>Oracle</li><li>SQL Server</li><li>MySQL</li><li>MongoDB</li><li>Redis</li><li>Neo4j</li><li>SQLite</li></ul>
+    </div>
+    <div class="stack__g rv">
+      <p class="label" data-en="APIs &amp; integration">APIs e integração</p>
+      <ul class="chips"><li>REST</li><li>SOAP</li><li>GraphQL</li><li>gRPC</li><li>WebSockets</li><li>WebRTC</li><li>JWT</li><li>cURL</li></ul>
+    </div>
+    <div class="stack__g rv rv-d1">
+      <p class="label" data-en="Messaging &amp; real time">Mensageria e tempo real</p>
+      <ul class="chips"><li>RabbitMQ</li><li>MQTT/Mosquitto</li><li>SIP</li><li>RTP/RTSP</li><li>ONVIF</li><li>TCP/UDP</li></ul>
+    </div>
+    <div class="stack__g rv rv-d2">
+      <p class="label" data-en="Infra &amp; DevOps">Infra e DevOps</p>
+      <ul class="chips"><li>Linux</li><li>Docker / Compose</li><li>NGINX</li><li>Apache</li><li>Jenkins CI/CD</li><li>Git</li><li>GitLab</li><li>Shell Script</li><li>Cloud</li></ul>
+    </div>
+  </div>
+</section>
+
+<!-- ========================= CTA ========================= -->
+<section class="cta" id="contato">
+  <div class="wrap cta__in">
+    <div>
+      <p class="label" data-en="Contact">Contato</p>
+      <h2 class="display" style="margin-top:14px" data-en="Tell us what your operation needs.">Conte o que sua operação precisa.</h2>
+      <p data-en="Send the problem, not a spec sheet. We answer with a technical path — what is ready, what has to be built, and in what order.">Mande o problema, não um edital. Respondemos com um caminho técnico: o que já está pronto, o que precisa ser construído e em que ordem.</p>
+    </div>
+    <div class="cta__act">
+      <a class="btn btn--ongreen" href="mailto:fulltechware@gmail.com?subject=Projeto%20%E2%80%94%20Fulltechware"><span data-en="Send an email">Enviar e-mail</span> <span class="arw" aria-hidden="true">→</span></a>
+      <a class="btn btn--line" href="https://wa.me/5531996653731" target="_blank" rel="noopener" data-en="Message on WhatsApp">Chamar no WhatsApp</a>
+      <a class="btn btn--line" href="https://github.com/fulltechware" target="_blank" rel="noopener" data-en="Open on GitHub">Ver no GitHub</a>
+    </div>
+  </div>
+</section>
+
+</main>
+
+<!-- ========================= FOOTER ========================= -->
+<footer class="ft">
+  <div class="wrap">
+    <div class="ft__grid">
+      <div>
+        <span class="logo">Fulltech<span class="mk mk--ink mk--static"><span class="mk__bar" aria-hidden="true"></span><span class="mk__txt">ware</span></span><sup>®</sup></span>
+        <p class="ft__bio" data-en="Software house. Development, licensing and maintenance of business systems.">Software house. Desenvolvimento, licenciamento e sustentação de sistemas.</p>
+        <p class="ft__meta" data-en="Belo Horizonte, MG · Brazil">Belo Horizonte, MG · Brasil</p>
+        <p class="ft__meta" data-en="We work in Portuguese and English">Atendimento em português e inglês</p>
+      </div>
+
+      <div class="ft__col">
+        <h4 data-en="Navigate">Navegação</h4>
+        <ul>
+          <li><a href="#empresas" data-en="Companies">Empresas</a></li>
+          <li><a href="#servicos" data-en="Services">Serviços</a></li>
+          <li><a href="#plataforma" data-en="Platform">Plataforma</a></li>
+          <li><a href="#setores" data-en="Industries">Setores</a></li>
+          <li><a href="#processo" data-en="Process">Processo</a></li>
+          <li><a href="#stack">Stack</a></li>
+          <li><a href="#contato" data-en="Contact">Contato</a></li>
+        </ul>
+      </div>
+
+      <div class="ft__col">
+        <h4>Links</h4>
+        <ul>
+          <li><a href="https://github.com/fulltechware" target="_blank" rel="noopener">GitHub · Fulltechware</a></li>
+          <li><a href="https://github.com/Tech-N-Logic" target="_blank" rel="noopener">GitHub · Tech N' Logic</a></li>
+          <li><a href="https://github.com/Tech-N-Logic/fulltechware" target="_blank" rel="noopener" data-en="Repository">Repositório</a></li>
+          <li><a href="https://www.linkedin.com/in/raphaelkaique1/" target="_blank" rel="noopener">LinkedIn</a></li>
+          <li><a href="mailto:fulltechware@gmail.com">fulltechware@gmail.com</a></li>
+          <li><a href="https://wa.me/5531996653731" target="_blank" rel="noopener">+55 (31) 99665-3731</a></li>
+        </ul>
+      </div>
+
+      <div class="ft__col">
+        <h4 data-en="Legal">Legal</h4>
+        <ul>
+          <li><span data-en="Proprietary software. It cannot be used, modified or redistributed without written permission.">Software proprietário. Não pode ser usado, modificado ou redistribuído sem permissão por escrito.</span></li>
+          <li><span data-en="Fulltechware® and Tech N' Logic® are registered marks.">Fulltechware® e Tech N' Logic® são marcas registradas.</span></li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="ft__btm">
+      <span>© 2026 Fulltechware® — <span data-en="All rights reserved">Todos os direitos reservados</span></span>
+      <span data-en="Solution for Everything">Solution for Everything</span>
+    </div>
+  </div>
+</footer>
+
+<script>
+(function(){
+  "use strict";
+  var reduce = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+
+  /* ---------- module data ---------- */
+  var MODULES = [
+    { key:"core", area:"core" },
+    { key:"more", area:"more", id:"02",
+      pt:{n:"Tech N' More", r:"Extensões", d:"Módulos que ampliam o sistema: automação de processos, análise de dados, conectividade e o que mais a operação exigir.", t:["Automação","Análise de dados","Conectividade"]},
+      en:{n:"Tech N' More", r:"Extensions", d:"Modules that extend the system: process automation, data analysis, connectivity and whatever else the operation calls for.", t:["Automation","Data analysis","Connectivity"]} },
+    { key:"cloud", area:"cloud", id:"03",
+      pt:{n:"Tech N' Cloud", r:"Nuvem", d:"Serviços em nuvem para integração, desenvolvimento ágil e acesso remoto — a operação continua disponível fora do escritório.", t:["Integração","Acesso remoto","Deploy ágil"]},
+      en:{n:"Tech N' Cloud", r:"Cloud", d:"Cloud services for integration, agile development and remote access — the operation stays reachable outside the office.", t:["Integration","Remote access","Agile deploy"]} },
+    { key:"tools", area:"tools", id:"04",
+      pt:{n:"Tech N' Tools", r:"SDK", d:"SDKs para desenvolvedores. Seu time cria novos módulos e integrações sobre a plataforma, sem depender de nós para cada ajuste.", t:["SDK","Integrações","Extensível"]},
+      en:{n:"Tech N' Tools", r:"SDK", d:"SDKs for developers. Your team builds new modules and integrations on top of the platform without waiting on us for every change.", t:["SDK","Integrations","Extensible"]} },
+    { key:"market", area:"market", id:"05",
+      pt:{n:"Tech N' Market", r:"Marketplace", d:"Marketplace de extensões e plugins criados pela comunidade, que amplia o ecossistema para além do que entregamos de fábrica.", t:["Plugins","Comunidade","Ecossistema"]},
+      en:{n:"Tech N' Market", r:"Marketplace", d:"A marketplace of community-built extensions and plugins that grows the ecosystem beyond what ships from the factory.", t:["Plugins","Community","Ecosystem"]} },
+    { key:"trade", area:"trade", id:"06",
+      pt:{n:"Tech N' Trade", r:"B2B", d:"Plataforma B2B para transações entre empresas: comunicação, trocas seguras e fluxos colaborativos. Otimiza cadeia de suprimentos e relação com fornecedores.", t:["Cadeia de suprimentos","Fornecedores","Transações seguras"]},
+      en:{n:"Tech N' Trade", r:"B2B", d:"A B2B platform for business transactions: communication, secure exchanges and collaborative workflows. Built to optimise supply chains and vendor relationships.", t:["Supply chain","Vendors","Secure exchange"]} },
+    { key:"business", area:"business", id:"07",
+      pt:{n:"Tech N' Business", r:"ERP & CRM", d:"ERP e CRM no mesmo sistema. Gestão da operação e do relacionamento com o cliente sem dois cadastros, dois logins e duas verdades.", t:["ERP","CRM","Operação"]},
+      en:{n:"Tech N' Business", r:"ERP & CRM", d:"ERP and CRM in one system. Run operations and customer relationships without two databases, two logins and two versions of the truth.", t:["ERP","CRM","Operations"]} },
+    { key:"bank", area:"bank", id:"08",
+      pt:{n:"Tech Bank", r:"Financeiro", d:"Plataforma financeira e aplicativo: pagamentos, transferências e gestão do dinheiro em uma interface segura e direta.", t:["Pagamentos","Transferências","App"]},
+      en:{n:"Tech Bank", r:"Financial", d:"A financial platform and mobile app: payments, transfers and money management in one secure, direct interface.", t:["Payments","Transfers","Mobile app"]} },
+    { key:"chain", area:"chain", id:"09", sub:true,
+      pt:{n:"FullTech · FullChain", r:"Sub-módulos", d:"FullTech é a exchange centralizada de ativos digitais, com ferramentas para iniciantes e avançados. FullChain é a blockchain própria, base para aplicações descentralizadas, com o token nativo TECH.", t:["Exchange","Blockchain","Token TECH"]},
+      en:{n:"FullTech · FullChain", r:"Sub-modules", d:"FullTech is the centralized digital-asset exchange, with tools for beginners and experts alike. FullChain is the in-house blockchain behind decentralized apps, with TECH as its native token.", t:["Exchange","Blockchain","TECH token"]} }
+  ];
+
+  var CORE = {
+    pt:{n:"Tech N' Core", r:"Núcleo", d:"Arquitetura modular e as funções essenciais do sistema. É o ponto onde todo o resto se conecta — e o que permite customizar sem reescrever.", t:["Arquitetura modular","Base do ecossistema","Customizável"]},
+    en:{n:"Tech N' Core", r:"Core", d:"Modular architecture and the essential functionality of the system. It is where everything else plugs in — and what makes customization possible without a rewrite.", t:["Modular architecture","Ecosystem base","Customizable"]}
+  };
+
+  var lang = "pt";
+  var current = "core";
+
+  var board    = document.getElementById("board");
+  var coreEl   = document.getElementById("core");
+  var coreId   = document.getElementById("coreId");
+  var coreNm   = document.getElementById("coreNm");
+  var coreDs   = document.getElementById("coreDs");
+  var coreTg   = document.getElementById("coreTg");
+  var coreBadge= document.getElementById("coreBadge");
+
+  function data(key){
+    if(key === "core") return CORE[lang];
+    var m = MODULES.filter(function(x){ return x.key === key; })[0];
+    return m ? m[lang] : CORE[lang];
+  }
+  function idOf(key){
+    if(key === "core") return "01";
+    var m = MODULES.filter(function(x){ return x.key === key; })[0];
+    return m ? m.id : "01";
+  }
+
+  function paintButtons(){
+    Array.prototype.forEach.call(board.querySelectorAll(".mod"), function(b){
+      var d = data(b.dataset.key);
+      b.querySelector(".mod__nm").textContent = d.n;
+      b.querySelector(".mod__rl").textContent = d.r;
+      b.setAttribute("aria-pressed", b.dataset.key === current ? "true" : "false");
+    });
+  }
+
+  function paintCore(animate){
+    var d = data(current);
+    coreId.textContent = (lang === "pt" ? "MÓDULO " : "MODULE ") + idOf(current) + " / 09";
+    coreBadge.textContent = d.r;
+    coreNm.textContent = d.n;
+    coreDs.textContent = d.d;
+    coreTg.innerHTML = "";
+    d.t.forEach(function(t){
+      var li = document.createElement("li");
+      li.textContent = t;
+      coreTg.appendChild(li);
+    });
+    if(animate && !reduce){
+      coreEl.classList.remove("is-swap");
+      void coreEl.offsetWidth;
+      coreEl.classList.add("is-swap");
     }
+  }
 
-    Dot.prototype = {
-    create: function(){
-      ctx.beginPath();
-      ctx.arc(this.x, this.y, this.radius, 0, Math.PI * 2, false);
-      ctx.fill();
-    },
+  board.addEventListener("click", function(e){
+    var b = e.target.closest(".mod");
+    if(!b) return;
+    current = (current === b.dataset.key) ? "core" : b.dataset.key;
+    paintButtons();
+    paintCore(true);
+  });
 
-    animate: function(){
-      for(i = 0; i < dots.nb; i++){
+  paintButtons();
+  paintCore(false);
 
-        var dot = dots.array[i];
+  /* ---------- language ---------- */
+  var titles = {
+    pt:"Fulltechware® — Solution for Everything",
+    en:"Fulltechware® — Solution for Everything"
+  };
 
-        if(dot.y < 0 || dot.y > canvas.height){
-          dot.vx = dot.vx;
-          dot.vy = - dot.vy;
-        }
-        else if(dot.x < 0 || dot.x > canvas.width){
-          dot.vx = - dot.vx;
-          dot.vy = dot.vy;
-        }
-        dot.x += dot.vx;
-        dot.y += dot.vy;
-      }
-    },
+  function setLang(next){
+    if(next === lang) return;
+    lang = next;
+    document.documentElement.lang = (lang === "pt" ? "pt-BR" : "en");
+    document.title = titles[lang];
 
-    line: function(){
-      for(i = 0; i < dots.nb; i++){
-        for(j = 0; j < dots.nb; j++){
-          i_dot = dots.array[i];
-          j_dot = dots.array[j];
+    Array.prototype.forEach.call(document.querySelectorAll("[data-en]"), function(el){
+      if(!el.dataset.pt) el.dataset.pt = el.textContent;
+      el.textContent = (lang === "en") ? el.dataset.en : el.dataset.pt;
+    });
+    Array.prototype.forEach.call(document.querySelectorAll("[data-en-aria]"), function(el){
+      if(!el.dataset.ptAria) el.dataset.ptAria = el.getAttribute("aria-label") || "";
+      el.setAttribute("aria-label", (lang === "en") ? el.dataset.enAria : el.dataset.ptAria);
+    });
 
-          if((i_dot.x - j_dot.x) < dots.distance && (i_dot.y - j_dot.y) < dots.distance && (i_dot.x - j_dot.x) > - dots.distance && (i_dot.y - j_dot.y) > - dots.distance){
-            if((i_dot.x - mousePosition.x) < dots.d_radius && (i_dot.y - mousePosition.y) < dots.d_radius && (i_dot.x - mousePosition.x) > - dots.d_radius && (i_dot.y - mousePosition.y) > - dots.d_radius){
-              ctx.beginPath();
-              ctx.moveTo(i_dot.x, i_dot.y);
-              ctx.lineTo(j_dot.x, j_dot.y);
-              ctx.stroke();
-              ctx.closePath();
-            }
-          }
-        }
-      }
+    Array.prototype.forEach.call(document.querySelectorAll(".lang button"), function(b){
+      b.setAttribute("aria-pressed", b.dataset.lang === lang ? "true" : "false");
+    });
+
+    paintButtons();
+    paintCore(false);
+  }
+
+  Array.prototype.forEach.call(document.querySelectorAll(".lang button"), function(b){
+    b.addEventListener("click", function(){ setLang(b.dataset.lang); });
+  });
+
+  /* ---------- marquee: duplicate the set so the loop is seamless ---------- */
+  var strip = document.getElementById("strip");
+  if(strip){ strip.appendChild(strip.firstElementChild.cloneNode(true)); }
+
+  /* ---------- sticky header state ---------- */
+  var hdr = document.getElementById("hdr");
+  var onScroll = function(){ hdr.classList.toggle("is-stuck", window.scrollY > 8); };
+  onScroll();
+  window.addEventListener("scroll", onScroll, { passive:true });
+
+  /* ---------- mobile menu ---------- */
+  var burger = document.getElementById("burger");
+  var nav = document.getElementById("nav");
+  burger.addEventListener("click", function(){
+    var open = nav.classList.toggle("is-open");
+    burger.setAttribute("aria-expanded", open ? "true" : "false");
+  });
+  nav.addEventListener("click", function(e){
+    if(e.target.tagName === "A"){
+      nav.classList.remove("is-open");
+      burger.setAttribute("aria-expanded","false");
     }
-    };
+  });
 
-    function createDots(){
-    ctx.clearRect(0, 0, canvas.width, canvas.height);
-    for(i = 0; i < dots.nb; i++){
-      dots.array.push(new Dot());
-      dot = dots.array[i];
+  /* ---------- reveal ---------- */
+  var rv = document.querySelectorAll(".rv, .pos__i, .proc__i");
+  if(reduce || !("IntersectionObserver" in window)){
+    Array.prototype.forEach.call(rv, function(el){ el.classList.add("in"); });
+  } else {
+    var io = new IntersectionObserver(function(entries){
+      entries.forEach(function(en){
+        if(en.isIntersecting){ en.target.classList.add("in"); io.unobserve(en.target); }
+      });
+    }, { rootMargin:"0px 0px -12% 0px", threshold:.12 });
+    Array.prototype.forEach.call(rv, function(el){ io.observe(el); });
+  }
 
-      dot.create();
-    }
-
-    dot.line();
-    dot.animate();
-    }
-
-    window.onmousemove = function(parameter) {
-    mousePosition.x = parameter.pageX;
-    mousePosition.y = parameter.pageY;
-    }
-
-    mousePosition.x = window.innerWidth / 2;
-    mousePosition.y = window.innerHeight / 2;
-
-    setInterval(createDots, 1000/30); 
-    };
-
-    window.onload = function() {
-    canvasDots();
-    };
-    </script>
+  /* ---------- kick off the load sequence ---------- */
+  requestAnimationFrame(function(){ document.body.classList.add("is-ready"); });
+})();
+</script>
 </body>
 </html>
-
-<!--
-<h1>Fulltechware<sup>®</sup></h1>
-<h2>Tech N' Logic<sup>®</sup></h2>
--->
